@@ -30,7 +30,7 @@ public class ArduinoInput implements SerialPortEventListener {
 	private static final int TIME_OUT = 2000;
 	/** Default bits per second for COM port. */
 	private static final int DATA_RATE = 9600;
-	String mode = "setup";
+	private String mode = "setup";
 	
 	public void initialize() {
 		
@@ -77,7 +77,7 @@ public class ArduinoInput implements SerialPortEventListener {
 	/**
 	 * Handle an event on the serial port. Read the data and print it.
 	 */
-	boolean overLimit = false;
+
 	public synchronized void serialEvent(SerialPortEvent oEvent) {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
@@ -88,18 +88,25 @@ public class ArduinoInput implements SerialPortEventListener {
 				switch (mode) {
 				case "setup":
 					Main.pinsList.get(id).setUp(inputNumber);
-					
 					break;
 				case "run":
+					
 					Main.pinsList.get(id).run(inputNumber);
 					break;
-				case "silence" : break;
+				case "silent" : break;
 				}
 			} catch (Exception e) {
 				System.err.println(e);
 			}
 		}
 
+	}	
+	//set state of the thing
+	public void setState(String state) {
+		mode = state;
+	}
+	public String getState() {
+		return mode;
 	}
 
 }

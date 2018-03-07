@@ -4,7 +4,7 @@ public class Pins {
 	private int lightValue;
 	private int max;
 	private int codeValue;
-	boolean overLimit;
+	boolean overLimit = false;
 	public  Pins(int id,int lightValue, int max,int codeValue){
 		this.id = id;
 		this. lightValue = lightValue;
@@ -38,6 +38,7 @@ public class Pins {
 		if(overLimit) {
 			if(lightValue <= max) {
 				System.out.println("click registered " + " pin " + id);
+				Main.recieveInput(codeValue);
 				overLimit = false;
 			}
 		}
