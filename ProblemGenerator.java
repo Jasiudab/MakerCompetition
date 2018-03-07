@@ -56,31 +56,37 @@ public class ProblemGenerator {
 	}
 	
 	//generate addition problems
+	//first element is the int[] valuesOfTheLeds, then its the target number, so first 0 - 4 is values of the leds, then target number
+	//between 1 and 50
 	public static int[] generateAdditionProblem(int input) {
 		Random rand = new Random();
-		int start = rand.nextInt(1000) + 1;
-		int number = start;
+		int[] valuesOfLeds = {rand.nextInt(20) + 1, rand.nextInt(20) + 1, rand.nextInt(20) + 1, rand.nextInt(20) + 1, 
+				rand.nextInt(50) + 1};
+
+		int number = 0;
 		switch(input) {
 		case 2:
-			number += (rand.nextInt(leds) + 1) + (rand.nextInt(leds) + 1);
+			number += valuesOfLeds[rand.nextInt(leds)] +  valuesOfLeds[rand.nextInt(leds)];
 			break;
 		case 3:
-			number += (rand.nextInt(leds) + 1) + (rand.nextInt(leds) + 1) + (rand.nextInt(leds) + 1);
+			number += valuesOfLeds[rand.nextInt(leds)] +  valuesOfLeds[rand.nextInt(leds)] +  valuesOfLeds[rand.nextInt(leds)];
 			break;
 		case 4:
-			number += (rand.nextInt(leds) + 1) + (rand.nextInt(leds) + 1) + (rand.nextInt(leds) + 1) + (rand.nextInt(leds) + 1);
+			number +=  valuesOfLeds[rand.nextInt(leds)] +  valuesOfLeds[rand.nextInt(leds)] +  
+					valuesOfLeds[rand.nextInt(leds)] +  valuesOfLeds[rand.nextInt(leds)];
 			break;
 		case 5:
-			number += (rand.nextInt(leds) + 1) + (rand.nextInt(leds) + 1) + (rand.nextInt(leds) + 1) + (rand.nextInt(leds) + 1) + (rand.nextInt(leds) + 1);
+			number +=  valuesOfLeds[rand.nextInt(leds)] +  valuesOfLeds[rand.nextInt(leds)] +  valuesOfLeds[rand.nextInt(leds)] + 
+					 valuesOfLeds[rand.nextInt(leds)] +  valuesOfLeds[rand.nextInt(leds)];
 			break;
 		}
 		
-		int[] ret = {start, number};
+		int[] ret = {valuesOfLeds[0], valuesOfLeds[1], valuesOfLeds[2], valuesOfLeds[3], valuesOfLeds[4], number};
 		return ret;
 	}
 	//Generate addition solutions, ie factors
-		public static boolean isAdditionSolution(int number[], int start, int targetNumber) {
-			int value = start;
+		public static boolean isAdditionSolution(int number[], int targetNumber) {
+			int value = 0;
 			for(int i = 0; i < number.length; i++) {
 				value += number[i]; 
 			}
