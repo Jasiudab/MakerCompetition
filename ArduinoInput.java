@@ -1,3 +1,4 @@
+
 /*
  * class is a thread that listens for the input from the arduino
  * it only reads Serial.println bearing in mind
@@ -41,7 +42,7 @@ public class ArduinoInput implements SerialPortEventListener {
 		try {
 			// open serial port, and use class name for the appName.
 			serialPort = (SerialPort) portId.open(this.getClass().getName(), TIME_OUT);
-			
+
 			// set port parameters
 			serialPort.setSerialPortParams(DATA_RATE, SerialPort.DATABITS_8, SerialPort.STOPBITS_1,
 					SerialPort.PARITY_NONE);
@@ -57,6 +58,7 @@ public class ArduinoInput implements SerialPortEventListener {
 			System.err.println(e);
 		}
 	}
+
 	public synchronized void close() {
 		if (serialPort != null) {
 			serialPort.removeEventListener();
@@ -77,17 +79,20 @@ public class ArduinoInput implements SerialPortEventListener {
 			}
 		}
 
-}
+	}
 
 	public static void main(String[] args) throws Exception {
-		Main test = new Main();
 		ArduinoInput main = new ArduinoInput();
 		main.initialize();
-		Thread t=new Thread() {
+		Thread t = new Thread() {
 			public void run() {
-				//the following line will keep this app alive for 1000 seconds,
-				//waiting for events to occur and responding to them (printing incoming messages to console).
-				try {Thread.sleep(1000000);} catch (InterruptedException ie) {}
+				// the following line will keep this app alive for 1000 seconds,
+				// waiting for events to occur and responding to them (printing
+				// incoming messages to console).
+				try {
+					Thread.sleep(1000000);
+				} catch (InterruptedException ie) {
+				}
 			}
 		};
 		t.start();
