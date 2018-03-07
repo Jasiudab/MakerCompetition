@@ -2,7 +2,10 @@
 /*
  * class is a thread that listens for the input from the arduino
  * it only reads Serial.println bearing in mind
- * 
+ * modes of this object
+ * either setup, listening for highest light intensity
+ * running, atm, prints if the light goes higher than the maximum
+ * paused, doesnt print out anything if the event if done
  */
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -25,6 +28,8 @@ public class ArduinoInput implements SerialPortEventListener {
 	private static final int TIME_OUT = 2000;
 	/** Default bits per second for COM port. */
 	private static final int DATA_RATE = 9600;
+	private double maximumLight;
+	String mode = "setup";
 
 	public void initialize() {
 		CommPortIdentifier portId = null;
@@ -69,11 +74,33 @@ public class ArduinoInput implements SerialPortEventListener {
 	/**
 	 * Handle an event on the serial port. Read the data and print it.
 	 */
+	boolean overLimit = false;
 	public synchronized void serialEvent(SerialPortEvent oEvent) {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
 				String inputLine = input.readLine();
-				System.out.println(inputLine);
+				int inputNumber = Integer.parseInt(inputLine);
+				// System.out.println(inputNumber);
+				switch (mode) {
+				case "setup":
+					
+					if (inputNumber > maximumLight && inputNumber < 2000) {
+						maximumLight = inputNumber;
+					}
+					break;
+				case "run":
+					
+					if (inputNumber > maximumLight + (maximumLight / 10)) {
+						overLimit = true;
+					}
+					if(overLimit) {
+						if(inputNumber <= maximumLight) {
+							System.out.println("click registered");
+							overLimit = false;
+						}
+					}
+					break;
+				}
 			} catch (Exception e) {
 				System.err.println(e);
 			}
@@ -82,22 +109,36 @@ public class ArduinoInput implements SerialPortEventListener {
 	}
 
 	public static void main(String[] args) throws Exception {
+
 		ArduinoInput main = new ArduinoInput();
 		main.initialize();
+		// getting maximum light values
+		main.mode = "setup";
 		Thread t = new Thread() {
 			public void run() {
-				// the following line will keep this app alive for 1000 seconds,
-				// waiting for events to occur and responding to them (printing
-				// incoming messages to console).
 				try {
-					Thread.sleep(1000000);
+					Thread.sleep(2000);
 				} catch (InterruptedException ie) {
 				}
 			}
 		};
 		t.start();
-		System.out.println("Started");
 		t.join();
+		System.out.println("Maximum Light: " + main.maximumLight);
+		main.mode = "run";
+		// run
+		Thread t2 = new Thread() {
+			public void run() {
+				try {
+					Thread.sleep(100000);
+				} catch (InterruptedException ie) {
+				}
+			}
+		};
+		t2.start();
+		System.out.println(ProblemGenerator.generateMultiplicationProblem(5));
+		t2.join();
+		
 		System.exit(0);
 	}
 }
