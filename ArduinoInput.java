@@ -10,6 +10,7 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import gnu.io.CommPortIdentifier;
@@ -20,7 +21,8 @@ import gnu.io.SerialPortEventListener;
 public class ArduinoInput implements SerialPortEventListener {
 	SerialPort serialPort;
 	public static final String portName = "COM1"; // the port that the program
-													// uses
+	
+	// uses
 	private BufferedReader input;
 	/** The output stream to the port */
 	private OutputStream output;
@@ -28,10 +30,11 @@ public class ArduinoInput implements SerialPortEventListener {
 	private static final int TIME_OUT = 2000;
 	/** Default bits per second for COM port. */
 	private static final int DATA_RATE = 9600;
-	private double maximumLight;
 	String mode = "setup";
-
+	
 	public void initialize() {
+		
+		
 		CommPortIdentifier portId = null;
 		Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
 
@@ -79,27 +82,18 @@ public class ArduinoInput implements SerialPortEventListener {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
 				String inputLine = input.readLine();
-				int inputNumber = Integer.parseInt(inputLine);
-				// System.out.println(inputNumber);
+				int id = Integer.parseInt(inputLine.substring(0, 1)) - 1;
+				int inputNumber = Integer.parseInt(inputLine.substring(1,inputLine.length()));
+				
 				switch (mode) {
 				case "setup":
+					Main.pinsList.get(id).setUp(inputNumber);
 					
-					if (inputNumber > maximumLight && inputNumber < 2000) {
-						maximumLight = inputNumber;
-					}
 					break;
 				case "run":
-					
-					if (inputNumber > maximumLight + (maximumLight / 10)) {
-						overLimit = true;
-					}
-					if(overLimit) {
-						if(inputNumber <= maximumLight) {
-							System.out.println("click registered");
-							overLimit = false;
-						}
-					}
+					Main.pinsList.get(id).run(inputNumber);
 					break;
+				case "silence" : break;
 				}
 			} catch (Exception e) {
 				System.err.println(e);
@@ -108,37 +102,4 @@ public class ArduinoInput implements SerialPortEventListener {
 
 	}
 
-	public static void main(String[] args) throws Exception {
-
-		ArduinoInput main = new ArduinoInput();
-		main.initialize();
-		// getting maximum light values
-		main.mode = "setup";
-		Thread t = new Thread() {
-			public void run() {
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException ie) {
-				}
-			}
-		};
-		t.start();
-		t.join();
-		System.out.println("Maximum Light: " + main.maximumLight);
-		main.mode = "run";
-		// run
-		Thread t2 = new Thread() {
-			public void run() {
-				try {
-					Thread.sleep(100000);
-				} catch (InterruptedException ie) {
-				}
-			}
-		};
-		t2.start();
-		System.out.println(ProblemGenerator.generateMultiplicationProblem(5));
-		t2.join();
-		
-		System.exit(0);
-	}
 }
