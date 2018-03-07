@@ -1,89 +1,37 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.util.Enumeration;
 
-import gnu.io.CommPortIdentifier;
-import gnu.io.SerialPort;
-import gnu.io.SerialPortEvent;
-import gnu.io.SerialPortEventListener;
+//grade system, number of non 1 values + 1, for example if its 12 with 3 inputs, then its 3 x 4 x 1, therefore grade 3 (2 inputs + 1)
+//grade 4 would be 3 inputs 24, only way to make that with 3 inputs (0 - 5) would be 3 x 4 x 2, therefore grade 4
+//this could be number of points
+//starts from 1 because for example a number of 1` still gives 1 point. 
 
-public class Main implements SerialPortEventListener {
-	SerialPort serialPort;
-	public static final String portName = "COM2"; // the port that the program
-													// uses
-	private BufferedReader input;
-	/** The output stream to the port */
-	private OutputStream output;
-	/** Milliseconds to block while waiting for port open */
-	private static final int TIME_OUT = 2000;
-	/** Default bits per second for COM port. */
-	private static final int DATA_RATE = 9600;
-
-	public void initialize() {
-		CommPortIdentifier portId = null;
-		Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
-
-		while (portEnum.hasMoreElements()) {
-			CommPortIdentifier currPortId = (CommPortIdentifier) portEnum.nextElement();
-
-			if (currPortId.getName().equals(portName)) {
-				portId = currPortId;
-				break;
-			}
+public class Main
+{
+	static int[] numbers = new int[500];
+	static int index;
+	static int leds;
+	
+	public Main()
+	{
+		leds = 5;
+		index = 0;
+		for(int a = 1; a <= leds; a++) {
+			for(int b = 1; b <= leds; b++) {
+				for(int c = 1; c <= leds; c++) {
+					int number = a * b * c;
+					boolean duplicate = false;
+				for(int i = 0; i < index; i++) {
+					if(numbers[i] == number) {
+						duplicate = true;	
+					}
+				}
+				if(!duplicate) 
+					numbers[index++] = number;
+				}
+				
+				}
 		}
-
-		try {
-			// open serial port, and use class name for the appName.
-			serialPort = (SerialPort) portId.open(this.getClass().getName(), TIME_OUT);
-
-			// set port parameters
-			serialPort.setSerialPortParams(DATA_RATE, SerialPort.DATABITS_8, SerialPort.STOPBITS_1,
-					SerialPort.PARITY_NONE);
-
-			// open the streams
-			input = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
-			output = serialPort.getOutputStream();
-
-			// add event listeners
-			serialPort.addEventListener(this);
-			serialPort.notifyOnDataAvailable(true);
-		} catch (Exception e) {
-			System.out.println("test");
+		for(int i = 0; i < index; i++) {
+			System.out.println(numbers[i]);	
 		}
-	}
-	public synchronized void close() {
-		if (serialPort != null) {
-			serialPort.removeEventListener();
-			serialPort.close();
-		}
-	}
-
-	/**
-	 * Handle an event on the serial port. Read the data and print it.
-	 */
-	public synchronized void serialEvent(SerialPortEvent oEvent) {
-		
-			try {
-				String inputLine=input.readLine();
-				System.out.println(inputLine);
-			} catch (Exception e) {
-				System.out.println("test");
-			}
-
-}
-
-	public static void main(String[] args) throws Exception {
-		SerialTest main = new SerialTest();
-		main.initialize();
-		Thread t=new Thread() {
-			public void run() {
-				//the following line will keep this app alive for 1000 seconds,
-				//waiting for events to occur and responding to them (printing incoming messages to console).
-				try {Thread.sleep(1000000);} catch (InterruptedException ie) {}
-			}
-		};
-		t.start();
-		System.out.println("Started");
 	}
 }
