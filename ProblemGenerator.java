@@ -56,9 +56,10 @@ public class ProblemGenerator {
 	}
 	
 	//generate addition problems
-	public static int generateAdditionProblem(int input) {
+	public static int[] generateAdditionProblem(int input) {
 		Random rand = new Random();
-		int number = 0;
+		int start = rand.nextInt(1000) + 1;
+		int number = start;
 		switch(input) {
 		case 2:
 			number += (rand.nextInt(leds) + 1) + (rand.nextInt(leds) + 1);
@@ -74,12 +75,12 @@ public class ProblemGenerator {
 			break;
 		}
 		
-		
-		return number;
+		int[] ret = {start, number};
+		return ret;
 	}
 	//Generate addition solutions, ie factors
-		public static boolean isAdditionSolution(int number[], int targetNumber) {
-			int value = 0;
+		public static boolean isAdditionSolution(int number[], int start, int targetNumber) {
+			int value = start;
 			for(int i = 0; i < number.length; i++) {
 				value += number[i]; 
 			}
