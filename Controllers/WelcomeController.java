@@ -18,7 +18,6 @@ import java.io.IOException;
  * This class is the controller for the Login screen
  * It will handle all inputs and validation
  * 
- * @author Joshua Blackman 
  * @author Jan Dabrowski
  *
  */
