@@ -5,7 +5,6 @@ import java.util.Random;
 //*******
 //make sure to run setUp somewhere in main though before use
 
-
 //grade system, number of non 1 values + 1, for example if its 12 with 3 inputs, then its 3 x 4 x 1, therefore grade 3 (2 inputs + 1)
 //grade 4 would be 3 inputs 24, only way to make that with 3 inputs (0 - 5) would be 3 x 4 x 2, therefore grade 4
 //this could be number of points
@@ -18,12 +17,13 @@ public class ProblemGenerator {
 	static int[] multiplicationNumbers5 = new int[91];
 	static int index;
 	static final int leds = 5;
-	//GENERATE METHODS
-	//Generate multiplication factors
+
+	// GENERATE METHODS
+	// Generate multiplication factors
 	public static int generateMultiplicationProblem(int input) {
 		Random rand = new Random();
 		int number = 0;
-		switch(input) {
+		switch (input) {
 		case 2:
 			number = multiplicationNumbers2[rand.nextInt(multiplicationNumbers2.length)];
 			break;
@@ -37,71 +37,103 @@ public class ProblemGenerator {
 			number = multiplicationNumbers5[rand.nextInt(multiplicationNumbers5.length)];
 			break;
 		}
-		
-		
+
 		return number;
 	}
-	
-	//Generate multiplication solutions, ie factors
+
+	// Generate multiplication solutions, ie factors
 	public static boolean isMultiplicationSolution(int number[], int targetNumber) {
 		int value = 1;
-		for(int i = 0; i < number.length; i++) {
-			value *= number[i]; 
+		for (int i = 0; i < number.length; i++) {
+			value *= number[i];
 		}
-		if(value == targetNumber) {
+		if (value == targetNumber) {
 			return true;
 		}
 		return false;
-		
+
 	}
-	
-	//generate addition problems
-	//first element is the int[] valuesOfTheLeds, then its the target number, so first 0 - 4 is values of the leds, then target number
-	//between 1 and 50
+
+	// generate addition problems
+	// first element is the int[] valuesOfTheLeds, then its the target number,
+	// so first 0 - 4 is values of the leds, then target number
+	// between 1 and 50
+	public static void randomiseIndexs(int[] indexs) {
+		Random rand = new Random();
+		int k = 0;
+		int randomNumber = rand.nextInt(100) + 1;
+		while (k < randomNumber) {
+			for (int i = 0; i < indexs.length; i++) {
+				int nextIndex = 0;
+				int prevIndex = 0;
+				if (i == 0) {
+					nextIndex = 1;
+					prevIndex = 4;
+				} else if (i == 4) {
+					nextIndex = 0;
+					prevIndex = 3;
+				} else {
+					nextIndex = i + 1;
+					prevIndex = i - 1;
+				}
+
+				int temp = indexs[i];
+				indexs[i] = indexs[prevIndex];
+				indexs[prevIndex] = temp;
+
+				temp = indexs[nextIndex];
+				indexs[nextIndex] = indexs[i];
+				indexs[i] = temp;
+			}
+			k ++;
+		}
+	}
+
 	public static int[] generateAdditionProblem(int input) {
 		Random rand = new Random();
-		int[] valuesOfLeds = {rand.nextInt(20) + 1, rand.nextInt(20) + 1, rand.nextInt(20) + 1, rand.nextInt(20) + 1, 
-				rand.nextInt(50) + 1};
+		int[] valuesOfLeds = { rand.nextInt(20) + 1, rand.nextInt(20) + 1, rand.nextInt(20) + 1, rand.nextInt(20) + 1,
+				rand.nextInt(50) + 1 };
 
 		int number = 0;
-		switch(input) {
+		int[] indexs = { 0, 1, 2, 3, 4 };
+		randomiseIndexs(indexs);
+		switch (input) {
 		case 2:
-			number += valuesOfLeds[rand.nextInt(leds)] +  valuesOfLeds[rand.nextInt(leds)];
+			number += valuesOfLeds[indexs[rand.nextInt(leds)]] + valuesOfLeds[indexs[rand.nextInt(leds)]];
 			break;
 		case 3:
-			number += valuesOfLeds[rand.nextInt(leds)] +  valuesOfLeds[rand.nextInt(leds)] +  valuesOfLeds[rand.nextInt(leds)];
+			number += valuesOfLeds[indexs[rand.nextInt(leds)]] + valuesOfLeds[indexs[rand.nextInt(leds)]]
+					+ valuesOfLeds[indexs[rand.nextInt(leds)]];
 			break;
 		case 4:
-			number +=  valuesOfLeds[rand.nextInt(leds)] +  valuesOfLeds[rand.nextInt(leds)] +  
-					valuesOfLeds[rand.nextInt(leds)] +  valuesOfLeds[rand.nextInt(leds)];
+			number += valuesOfLeds[indexs[rand.nextInt(leds)]] + valuesOfLeds[indexs[rand.nextInt(leds)]]
+					+ valuesOfLeds[indexs[rand.nextInt(leds)]] + valuesOfLeds[indexs[rand.nextInt(leds)]];
 			break;
 		case 5:
-			number +=  valuesOfLeds[rand.nextInt(leds)] +  valuesOfLeds[rand.nextInt(leds)] +  valuesOfLeds[rand.nextInt(leds)] + 
-					 valuesOfLeds[rand.nextInt(leds)] +  valuesOfLeds[rand.nextInt(leds)];
+			number += valuesOfLeds[indexs[rand.nextInt(leds)]] + valuesOfLeds[indexs[rand.nextInt(leds)]]
+					+ valuesOfLeds[indexs[rand.nextInt(leds)]] + valuesOfLeds[indexs[rand.nextInt(leds)]]
+					+ valuesOfLeds[indexs[rand.nextInt(leds)]];
 			break;
 		}
-		
-		int[] ret = {valuesOfLeds[0], valuesOfLeds[1], valuesOfLeds[2], valuesOfLeds[3], valuesOfLeds[4], number};
+
+		int[] ret = { valuesOfLeds[0], valuesOfLeds[1], valuesOfLeds[2], valuesOfLeds[3], valuesOfLeds[4], number };
 		return ret;
 	}
-	//Generate addition solutions, ie factors
-		public static boolean isAdditionSolution(int number[], int targetNumber) {
-			int value = 0;
-			for(int i = 0; i < number.length; i++) {
-				value += number[i]; 
-			}
-			if(value == targetNumber) {
-				return true;
-			}
-			return false;
-			
+
+	// Generate addition solutions, ie factors
+	public static boolean isAdditionSolution(int number[], int targetNumber) {
+		int value = 0;
+		for (int i = 0; i < number.length; i++) {
+			value += number[i];
 		}
-	
-	
-	
-	
-	
-	//SETUP METHODS
+		if (value == targetNumber) {
+			return true;
+		}
+		return false;
+
+	}
+
+	// SETUP METHODS
 	static void setUp() {
 		// setup all the arrays
 		// for multiplication
