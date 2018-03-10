@@ -5,10 +5,14 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class GameSingleController {
@@ -21,35 +25,39 @@ public class GameSingleController {
 	private Button goalNumber;
 	@FXML
 	private TextField numberInputTextFields;
-	@FXML Label l1, l2, l3, l4, l5;
-	Main e;
+	@FXML
+	Label l1, l2, l3, l4, l5;
 	int goal;
 	int noOfInputs;
 	int currentInputs;
 	String game;
-	public void initialize(int goal, int noOfInputs, String game, Main e) {
+
+	public void initialize(int goal, int noOfInputs, String game) {
 		this.goalNumber.setText(String.valueOf(goal));
 		this.goal = goal;
-		switch(game) {
-		case "multiplication": this.currentNumber.setText("1"); break;
-		case "addition": this.currentNumber.setText("0"); break;
+		switch (game) {
+		case "multiplication":
+			this.currentNumber.setText("1");
+			break;
+		case "addition":
+			this.currentNumber.setText("0");
+			break;
 		}
-		this.e = e;
 		this.currentInputs = 0;
 		this.noOfInputs = noOfInputs;
 		this.game = game;
-		int[] pinValues = e.getPinValues();
-		l1.setText("Box 1 : \n"+ pinValues[0]);
-		l2.setText("Box 2 : \n"+ pinValues[1]);
-		l3.setText("Box 3 : \n"+ pinValues[2]);
-		l4.setText("Box 4 : \n"+ pinValues[3]);
-		l5.setText("Box 5 : \n"+ pinValues[4]);
+		int[] pinValues = Main.getPinValues();
+		l1.setText("Box 1 : \n" + pinValues[0]);
+		l2.setText("Box 2 : \n" + pinValues[1]);
+		l3.setText("Box 3 : \n" + pinValues[2]);
+		l4.setText("Box 4 : \n" + pinValues[3]);
+		l5.setText("Box 5 : \n" + pinValues[4]);
 		Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
-				if (e.newInput()) {
-					shotHappenedFor(e.getNewInput());
+				if (Main.newInput()) {
+					shotHappenedFor(Main.getNewInput());
 
 				}
 			}
@@ -60,37 +68,56 @@ public class GameSingleController {
 	}
 
 	public void shotHappenedFor(int number) {
-		if (currentInputs < noOfInputs) { //if inputs is less than number
+		System.out.println("current input "+ currentInputs);
+		if (currentInputs < noOfInputs) { // if inputs is less than number
 			this.shotNumber.setText(number + "");
 			int currentNew = Integer.parseInt(this.currentNumber.getText());
-			switch(game) {
-			case "addition": currentNew += number; break;
-			case "multiplication":  currentNew *= number; break;
+			switch (game) {
+			case "addition":
+				currentNew += number;
+				break;
+			case "multiplication":
+				currentNew *= number;
+				break;
 			}
 			this.currentNumber.setText(currentNew + "");
 			currentInputs++;
 		}
-		if(currentInputs == noOfInputs) { //if the game is over
+		if (currentInputs == noOfInputs) { // if the game is over
 			accept();
 		}
 	}
-	
+
 	public void accept() {
-		if(Integer.parseInt(currentNumber.getText()) == goal){
+		if (Integer.parseInt(currentNumber.getText()) == goal) {
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setTitle("Success");
 			alert.setContentText("You won!");
 			alert.show();
-		}
-		else{
+		} else {
 			Alert alert = new Alert(Alert.AlertType.WARNING);
 			alert.setTitle("Error");
 			alert.setContentText("You Lost");
 			alert.show();
-		}	
-		//textBasedSetup();
+
+		}
+		// return to setup
+		currentInputs = 0;
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Scenes/ConfigSingle.fxml"));
+			Parent editRoot = (Parent) fxmlLoader.load();
+
+			Scene newScene = new Scene(editRoot);
+			Stage stage = (Stage) currentNumber.getScene().getWindow();
+			stage.setTitle("Shooter | Config");
+
+			stage.setScene(newScene);
+
+		} catch (Exception e) {
+		}
+		// textBasedSetup();
 	}
-	
+
 	public void shootClicked() {
 		int toShot = Integer.parseInt(this.numberInputTextFields.getText());
 		this.shotHappenedFor(toShot);

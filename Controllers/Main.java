@@ -21,16 +21,57 @@ public class Main {
 	static int numberShot = 1;
 	static boolean isNewInput = false;
 	static int[] pinsValues = new int[5];
+
+	public static void setUpPins() {
+
+		pinsList.add(new Pins(1, 0, 0, pinsValues[0]));
+		pinsList.add(new Pins(2, 0, 0,  pinsValues[1]));
+		pinsList.add(new Pins(3, 0, 0,  pinsValues[2]));
+		pinsList.add(new Pins(4, 0, 0,  pinsValues[3]));
+		pinsList.add(new Pins(5, 0, 0,  pinsValues[4]));
+	}
+	public static void reset() {
+		pinsList.clear();
+		main = null;
+		solution = 0;
+		noInputs = 0;
+		userInput = null;
+		inputEntered = 0;
+		numberShot = 1;
+		isNewInput = false;
+		pinsValues = new int[5];
+	}
 	
-	public Main(int n, String game) {
+
+	public static void setup(int n, String game) {
+		inputEntered = 0;
+		
 		ProblemGenerator.setUp();
 		noInputs = n;
+		numberShot = 1;
 		main = new ArduinoInput();
 		main.initialize();
 		// getting maximum light values
 		main.setState("setup");
 		// setup problem generator
-		setup(game); //setup the solution
+		switch(game) {
+		case "multiplication": 
+
+			solution = ProblemGenerator.generateMultiplicationProblem(noInputs); 
+		for(int i = 0; i < pinsValues.length; i++) {
+			pinsValues[i] = i + 1;
+		}
+			break;
+		case "addition":
+			int[] problem =  ProblemGenerator.generateAdditionProblem(noInputs);
+			solution = problem[5];
+			for(int i = 0; i < pinsValues.length; i++) {
+				pinsValues[i] = problem[i];
+				System.out.println(pinsValues[i]);
+			}
+		break;
+		}
+
 		setUpPins(); //setup pins
 
 		userInput = new int[noInputs];
@@ -56,36 +97,6 @@ public class Main {
 
 	}
 
-	public void setUpPins() {
-
-		pinsList.add(new Pins(1, 0, 0, pinsValues[0]));
-		pinsList.add(new Pins(2, 0, 0,  pinsValues[1]));
-		pinsList.add(new Pins(3, 0, 0,  pinsValues[2]));
-		pinsList.add(new Pins(4, 0, 0,  pinsValues[3]));
-		pinsList.add(new Pins(5, 0, 0,  pinsValues[4]));
-	}
-
-	public static void setup(String game) {
-		switch(game) {
-		case "multiplication": 
-
-			solution = ProblemGenerator.generateMultiplicationProblem(noInputs); 
-		for(int i = 0; i < pinsValues.length; i++) {
-			pinsValues[i] = i + 1;
-		}
-			break;
-		case "addition":
-			int[] problem =  ProblemGenerator.generateAdditionProblem(noInputs);
-			solution = problem[5];
-			for(int i = 0; i < pinsValues.length; i++) {
-				pinsValues[i] = problem[i];
-				System.out.println(pinsValues[i]);
-			}
-		break;
-		}
-
-	}
-
 	public static void recieveInput(int id) {
 		int test = pinsList.get(id).getCodeValue();
 		if(inputEntered < noInputs) {
@@ -97,27 +108,29 @@ public class Main {
 		}
 		if(inputEntered == noInputs) {
 			main.setState("silent");
+			main.close();
+			reset();
 		}
 
 		
 
 	}
 	//get new input, most recent input
-	public int getNewInput() {
+	public static int getNewInput() {
 		isNewInput = false;
 		return numberShot;
 	}
 	
-	public boolean newInput() {
+	public static boolean newInput() {
 		return isNewInput;
 	}
-	public int getSolution(){
+	public static int getSolution(){
 		return solution;
 	}
 
 
 	
-	public int[] getPinValues(){
+	public static int[] getPinValues(){
 		return pinsValues;
 	}
 }
