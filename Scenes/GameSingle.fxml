@@ -20,6 +20,13 @@
             <Font size="24.0" />
          </font>
       </Button>
+      <Label fx:id = "l5" layoutX="350" layoutY="120.0" text="Box 5:" />
+      <Label fx:id = "l4" layoutX="300" layoutY="120.0" text="Box 4:" />
+      <Label fx:id = "l3" layoutX="250" layoutY="120.0" text="Box 3:" />
+      <Label fx:id = "l2" layoutX="200" layoutY="120.0" text="Box 2:" />
+      <Label fx:id = "l1" layoutX="150" layoutY="120.0" text="Box 1:" />
+     
+           
       <Label layoutX="411.0" layoutY="120.0" text="Number you just shot:" />
       <Button fx:id="shotNumber" layoutX="436.0" layoutY="159.0" mnemonicParsing="false" text="NUMBER">
          <font>
@@ -27,7 +34,5 @@
          </font>
       </Button>
       <Label id="welcome-text" layoutX="187.0" layoutY="42.0" text="GAME IS ON!" />
-      <TextField fx:id="numberInputTextFields" layoutX="425.0" layoutY="288.0" />
-      <Button layoutX="466.0" layoutY="325.0" mnemonicParsing="false" onAction="#shootClicked" text="Shoot" />
    </children>
 </AnchorPane>

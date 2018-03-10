@@ -12,7 +12,7 @@
             <Font size="48.0" />
          </font>
       </Label>
-      <Button fx:id="singleButton" layoutX="123.0" layoutY="210.0" mnemonicParsing="false" onAction="#singleModeClicked" text="Single">
+      <Button fx:id="singleButton" layoutX="123.0" layoutY="210.0" mnemonicParsing="false" onAction = "#singleModeClicked" text="Single">
          <font>
             <Font size="36.0" />
          </font>
