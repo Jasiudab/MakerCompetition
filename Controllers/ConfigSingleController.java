@@ -37,6 +37,7 @@ public class ConfigSingleController {
 				Parent editRoot = (Parent) fxmlLoader.load();
 				
 				GameSingleController dc = fxmlLoader.getController();
+				Main.reset();
 				Main.setup(noOfInputs, gameType);
 				dc.initialize(Main.getSolution(), noOfInputs, gameType);
 
