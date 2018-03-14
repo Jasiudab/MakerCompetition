@@ -12,6 +12,7 @@ public class GameMultiController {
     private ArrayList<PlayerRowController> playersControllers = new ArrayList<>();
 
     public void initialize(ArrayList<Player> players) {
+        gridPane.addRow(players.size());
         int row = 0;
         for (Player elem : players) {
 

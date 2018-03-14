@@ -42,27 +42,27 @@ public class ConfigMultiController {
             Player player = new Player(elem.getNameTextField());
             players.add(player);
 
-            try{
+        }
 
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Scenes/GameMulti.fxml"));
-                Parent editRoot = (Parent) fxmlLoader.load();
+        try{
 
-                GameMultiController dc = fxmlLoader.getController();
-                dc.initialize(players);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Scenes/GameMulti.fxml"));
+            Parent editRoot = (Parent) fxmlLoader.load();
 
-                Scene newScene = new Scene(editRoot);
-                Stage stage = (Stage) gridPane.getScene().getWindow();
-                stage.setTitle("LaserGun | Game");
+            GameMultiController dc = fxmlLoader.getController();
+            dc.initialize(players);
 
-                stage.setScene(newScene);
+            Scene newScene = new Scene(editRoot);
+            Stage stage = (Stage) gridPane.getScene().getWindow();
+            stage.setTitle("LaserGun | Game");
+
+            stage.setScene(newScene);
 
 
-            } catch (IOException e) {
-                e.printStackTrace();
-                // Quit the program (with an error code)
-                System.exit(-1);
-
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Quit the program (with an error code)
+            System.exit(-1);
 
         }
     }
