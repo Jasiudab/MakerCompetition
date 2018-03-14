@@ -31,8 +31,12 @@ public class GameSingleController {
 	int noOfInputs;
 	int currentInputs;
 	String game;
+	Timeline fiveSecondsWonder;
+	private Player player;
+	int score = 0;
 
-	public void initialize(int goal, int noOfInputs, String game) {
+	public void initialize(int goal, int noOfInputs, String game, Player player) {
+		this.player = player;
 		this.goalNumber.setText(String.valueOf(goal));
 		this.goal = goal;
 		switch (game) {
@@ -52,7 +56,7 @@ public class GameSingleController {
 		l3.setText("Box 3 : \n" + pinValues[2]);
 		l4.setText("Box 4 : \n" + pinValues[3]);
 		l5.setText("Box 5 : \n" + pinValues[4]);
-		Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+		fiveSecondsWonder = new Timeline(new KeyFrame(Duration.seconds(0.1), new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
@@ -68,8 +72,9 @@ public class GameSingleController {
 	}
 
 	public void shotHappenedFor(int number) {
-		System.out.println("current input "+ currentInputs);
+		System.out.println("current input " + currentInputs);
 		if (currentInputs < noOfInputs) { // if inputs is less than number
+
 			this.shotNumber.setText(number + "");
 			int currentNew = Integer.parseInt(this.currentNumber.getText());
 			switch (game) {
@@ -103,15 +108,19 @@ public class GameSingleController {
 		}
 		// return to setup
 		currentInputs = 0;
+		fiveSecondsWonder.stop();
+		player.addScore(score);
 		try {
+			System.out.println("asdf");
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Scenes/ConfigSingle.fxml"));
 			Parent editRoot = (Parent) fxmlLoader.load();
 
-			Scene newScene = new Scene(editRoot);
+			Scene newScene = new Scene(editRoot, MainGUI.BIG_WIDTH, MainGUI.BIG_HEIGHT);
 			Stage stage = (Stage) currentNumber.getScene().getWindow();
 			stage.setTitle("Shooter | Config");
 
 			stage.setScene(newScene);
+			stage.close();
 
 		} catch (Exception e) {
 		}

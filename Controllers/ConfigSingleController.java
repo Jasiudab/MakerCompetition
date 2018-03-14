@@ -35,14 +35,15 @@ public class ConfigSingleController {
 				GameSingleController dc = fxmlLoader.getController();
 				Main.reset();
 				Main.setup(noOfInputs, gameType);
-				dc.initialize(Main.getSolution(), noOfInputs, gameType);
+				dc.initialize(Main.getSolution(), noOfInputs, gameType, new Player(0, "Player"));
 
 			
 				Scene newScene = new Scene(editRoot, MainGUI.BIG_WIDTH, MainGUI.BIG_HEIGHT);
-				Stage stage = (Stage) playButton.getScene().getWindow();
+				Stage stage = new Stage();
 				stage.setTitle("Shooter | Game");
 
 				stage.setScene(newScene);
+				stage.show();
 
 		} catch (IOException e) {
 			e.printStackTrace();
