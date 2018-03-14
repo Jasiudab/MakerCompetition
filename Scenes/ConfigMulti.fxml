@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../Styles/style.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ConfigMultiController">
    <top>
@@ -47,4 +48,67 @@
          </padding>
       </VBox>
    </right>
+    <bottom>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="480.0">
+                    <children>
+                        <Label text="InputNo:">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </Label>
+                        <Button fx:id="inputs2" mnemonicParsing="false" onAction="#getInputs2" text="2 inputs">
+                            <HBox.margin>
+                                <Insets left="5.0" right="5.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="inputs3" mnemonicParsing="false" onAction="#getInputs3" text="3 inputs">
+                            <HBox.margin>
+                                <Insets left="5.0" right="5.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="inputs4" mnemonicParsing="false" onAction="#getInputs4" text="4 inputs">
+                            <HBox.margin>
+                                <Insets left="5.0" right="5.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="inputs5" mnemonicParsing="false" onAction="#getInputs5" text="5 inputs">
+                            <HBox.margin>
+                                <Insets left="5.0" right="5.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="381.0">
+                    <children>
+                        <Label text="Mode: ">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets bottom="5.0" right="5.0" />
+                            </HBox.margin>
+                        </Label>
+                        <Button fx:id="addButton" mnemonicParsing="false" onAction="#setAdditionGame" text="Addition">
+                            <HBox.margin>
+                                <Insets bottom="5.0" right="5.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="multiButton" mnemonicParsing="false" onAction="#setMultiplicationGame" text="Multiplication">
+                            <HBox.margin>
+                                <Insets bottom="5.0" right="5.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+        </VBox>
+    </bottom>
 </BorderPane>
