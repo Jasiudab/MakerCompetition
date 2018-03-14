@@ -11,7 +11,7 @@ root {
 }
 
 .root {
--fx-background-image: url("lightBackground.jpg");
+-fx-background-image: url("backgroundOrange.jpg");
 -fx-background-size: cover;
 }
 
