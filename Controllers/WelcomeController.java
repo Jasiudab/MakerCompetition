@@ -9,10 +9,8 @@ import javafx.scene.Scene;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import src.Player;
 import javafx.scene.control.ComboBox;
 import java.io.IOException;
-import java.util.ArrayList;
 
 
 public class WelcomeController {
@@ -52,22 +50,12 @@ public class WelcomeController {
 
 	public void multiModeClicked() {
 
-		Player p1 = new Player("Jan");
-		Player p2 = new Player("Ben");
-		Player p3 = new Player("Tom");
-
-		ArrayList<Player> players = new ArrayList<>();
-
-		players.add(p1);
-		players.add(p2);
-		players.add(p3);
-
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Scenes/GameMulti.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Scenes/ConfigMulti.fxml"));
 			Parent editRoot = (Parent) fxmlLoader.load();
 
-			GameMultiController dc = fxmlLoader.getController();
-			dc.initialize(players);
+			ConfigMultiController dc = fxmlLoader.getController();
+			dc.initialize(Integer.parseInt(noOfPlayersComboBox.getValue().substring(0,1)));
 
 			Scene newScene = new Scene(editRoot);
 			Stage stage = (Stage) singleButton.getScene().getWindow();
