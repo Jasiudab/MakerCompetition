@@ -3,24 +3,16 @@ package Controllers;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
+import src.Player;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-/**
- * This class is the controller for the Login screen
- * It will handle all inputs and validation
- * 
- * @author Jan Dabrowski
- *
- */
+
 public class WelcomeController {
 
 
@@ -51,17 +43,27 @@ public class WelcomeController {
 
 	public void multiModeClicked() {
 
+		Player p1 = new Player("Jan");
+		Player p2 = new Player("Ben");
+		Player p3 = new Player("Tom");
+
+		ArrayList<Player> players = new ArrayList<>();
+
+		players.add(p1);
+		players.add(p2);
+		players.add(p3);
+
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Scenes/GameMultiplayer.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Scenes/GameMulti.fxml"));
 			Parent editRoot = (Parent) fxmlLoader.load();
 
 
-			GameMultiplayer dc = fxmlLoader.getController();
-			dc.initialize();
+			GameMultiController dc = fxmlLoader.getController();
+			dc.initialize(players);
 
 			Scene newScene = new Scene(editRoot);
 			Stage stage = (Stage) singleButton.getScene().getWindow();
-			stage.setTitle("Shooter | Config");
+			stage.setTitle("LaserGun | Game");
 
 			stage.setScene(newScene);
 
