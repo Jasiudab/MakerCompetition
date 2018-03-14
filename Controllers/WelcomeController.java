@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.control.ComboBox;
@@ -16,11 +17,14 @@ import java.io.IOException;
 public class WelcomeController {
 
 	private ObservableList<String> noOfPlayersChoiceList = FXCollections.observableArrayList("2 players", "3 players","4 players","5 players");
+	private boolean comboClicked = false;
 
 	@FXML private Button singleButton;
+	@FXML private Button multiButton;
 	@FXML private ComboBox<String> noOfPlayersComboBox;
 
 	public void initialize() {
+		this.multiButton.setId("pressed-big-button");
 		noOfPlayersComboBox.setItems(noOfPlayersChoiceList);
 	}
 
@@ -50,29 +54,39 @@ public class WelcomeController {
 
 	public void multiModeClicked() {
 
-		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Scenes/ConfigMulti.fxml"));
-			Parent editRoot = (Parent) fxmlLoader.load();
+		if(comboClicked) {
 
-			ConfigMultiController dc = fxmlLoader.getController();
-			dc.initialize(Integer.parseInt(noOfPlayersComboBox.getValue().substring(0,1)));
+			try {
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Scenes/ConfigMulti.fxml"));
+				Parent editRoot = (Parent) fxmlLoader.load();
 
-			Scene newScene = new Scene(editRoot);
-			Stage stage = (Stage) singleButton.getScene().getWindow();
-			stage.setTitle("LaserGun | Game");
+				ConfigMultiController dc = fxmlLoader.getController();
+				dc.initialize(Integer.parseInt(noOfPlayersComboBox.getValue().substring(0, 1)));
 
-			stage.setScene(newScene);
+				Scene newScene = new Scene(editRoot);
+				Stage stage = (Stage) singleButton.getScene().getWindow();
+				stage.setTitle("LaserGun | Game");
 
-		} catch (IOException e) {
-			e.printStackTrace();
-			// Quit the program (with an error code)
-			System.exit(-1);
+				stage.setScene(newScene);
 
+			} catch (IOException e) {
+				e.printStackTrace();
+				// Quit the program (with an error code)
+				System.exit(-1);
+
+			}
+		}else {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setTitle("Error");
+			alert.setContentText("You must enter number of players!");
+			alert.show();
 		}
 	}
 
 	@FXML
 	private void noOfPlayersComboBox() {
+		this.multiButton.setId("big-button");
+		comboClicked = true;
 	}
 
 }
