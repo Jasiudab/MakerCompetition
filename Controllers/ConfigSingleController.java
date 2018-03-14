@@ -1,20 +1,12 @@
 package Controllers;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
-
-import java.awt.Event;
 import java.io.IOException;
-
-import com.sun.glass.events.MouseEvent;
 
 
 public class ConfigSingleController {
@@ -24,6 +16,10 @@ public class ConfigSingleController {
 	@FXML Button inputs3;
 	@FXML Button inputs4;
 	@FXML Button inputs5;
+
+	@FXML Button addButton;
+	@FXML Button multiButton;
+
 	static int noOfInputs = 2;
 	String gameType = "addition";
 	/**
@@ -56,21 +52,40 @@ public class ConfigSingleController {
 	}
 	public void getInputs2(){
 		noOfInputs = 2;
+		this.unpressInputs();
+		inputs2.setId("pressed-button");
 	}
 	public void getInputs3(){
 		noOfInputs = 3;
+		this.unpressInputs();
+		inputs3.setId("pressed-button");
 	}
 	public void getInputs4(){
 		noOfInputs = 4;
+		this.unpressInputs();
+		inputs4.setId("pressed-button");
 	}
 	public void getInputs5(){
 		noOfInputs = 5;
+		this.unpressInputs();
+		inputs5.setId("pressed-button");
+	}
+
+	private void unpressInputs(){
+		inputs2.setId("");
+		inputs3.setId("");
+		inputs4.setId("");
+		inputs5.setId("");
 	}
 	public void setAdditionGame(){
 		gameType = "addition";
+		addButton.setId("pressed-button");
+		multiButton.setId("");
 	}
 	public void setMultiplicationGame(){
 		gameType = "multiplication";
+		multiButton.setId("pressed-button");
+		addButton.setId("");
 	}
 	public static int getInputs(){
 		return noOfInputs;
