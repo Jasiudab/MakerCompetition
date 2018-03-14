@@ -50,7 +50,7 @@
    <top>
       <HBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Label id="welcome-text" text="GAME IS ON!">
+            <Label id="welcome-text" fx:id="titleLabel" text="GAME IS ON!">
                <font>
                   <Font size="36.0" />
                </font>

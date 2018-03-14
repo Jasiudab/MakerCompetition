@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import src.Player;
 
 import java.io.IOException;
 
@@ -40,7 +39,7 @@ public class PlayerRowController extends HBox {
 
     public void refresh() {
         this.scoreLabel.setText(String.valueOf(player.getScore()));
-        this.positionLabel.setText(String.valueOf(player.getPosition()));
+        this.positionLabel.setText("1");
     }
 
     public void foo(String foo) {

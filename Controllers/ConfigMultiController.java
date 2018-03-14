@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import src.Player;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class ConfigMultiController {
     public void playButtonClicked(){
         for (PlayerConfigRowController elem : playersControllers) {
 
-            Player player = new Player(elem.getNameTextField());
+            Player player = new Player(0,elem.getNameTextField());
             players.add(player);
 
         }
