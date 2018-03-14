@@ -30,4 +30,20 @@ public class PlayerConfigRowController extends HBox {
         this.numberLabel.setText(String.valueOf(number));
         this.nameTextField.setText("player");
     }
+
+    public Label getNumberLabel() {
+        return numberLabel;
+    }
+
+    public void setNumberLabel(Label numberLabel) {
+        this.numberLabel = numberLabel;
+    }
+
+    public String getNameTextField() {
+        return nameTextField.getText();
+    }
+
+    public void setNameTextField(TextField nameTextField) {
+        this.nameTextField = nameTextField;
+    }
 }
