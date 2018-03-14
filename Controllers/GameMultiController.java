@@ -37,6 +37,10 @@ public class GameMultiController {
     }
 
     public  void goOnButtonClicked(){
+        int turn = Integer.parseInt(this.turnLabel.getText());
+        turn ++;
+        this.turnLabel.setText(String.valueOf(turn));
 
+        
     }
 }
