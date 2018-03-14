@@ -25,8 +25,4 @@ public class GameMultiController {
             row++;
         }
     }
-
-    public void goOnButtonClicked(){
-
-    }
 }

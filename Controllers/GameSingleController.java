@@ -14,7 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import src.GameConfig;
 
 public class GameSingleController {
 
@@ -33,11 +32,9 @@ public class GameSingleController {
 	int currentInputs;
 	String game;
 
-	public void initialize(int goal, GameConfig config) {
+	public void initialize(int goal, int noOfInputs, String game) {
 		this.goalNumber.setText(String.valueOf(goal));
 		this.goal = goal;
-		this.noOfInputs = config.getNoOfInputs();
-		this.game = config.getType();
 		switch (game) {
 		case "multiplication":
 			this.currentNumber.setText("1");
@@ -47,7 +44,8 @@ public class GameSingleController {
 			break;
 		}
 		this.currentInputs = 0;
-
+		this.noOfInputs = noOfInputs;
+		this.game = game;
 		int[] pinValues = Main.getPinValues();
 		l1.setText("Box 1 : \n" + pinValues[0]);
 		l2.setText("Box 2 : \n" + pinValues[1]);

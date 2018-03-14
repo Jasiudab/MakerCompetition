@@ -3,7 +3,6 @@ package Controllers;
 import java.util.ArrayList;
 
 import javafx.application.Application;
-import src.GameConfig;
 
 //the main arduino input, states are 
 	/*
@@ -44,18 +43,18 @@ public class Main {
 	}
 	
 
-	public static void setup(GameConfig config) {
+	public static void setup(int n, String game) {
 		inputEntered = 0;
 		
 		ProblemGenerator.setUp();
-		noInputs = config.getNoOfInputs();
+		noInputs = n;
 		numberShot = 1;
 		main = new ArduinoInput();
 		main.initialize();
 		// getting maximum light values
 		main.setState("setup");
 		// setup problem generator
-		switch(config.getType()) {
+		switch(game) {
 		case "multiplication": 
 
 			solution = ProblemGenerator.generateMultiplicationProblem(noInputs); 

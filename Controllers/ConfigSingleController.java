@@ -6,8 +6,6 @@ import javafx.scene.Scene;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import src.GameConfig;
-
 import java.io.IOException;
 
 
@@ -35,14 +33,12 @@ public class ConfigSingleController {
 				Parent editRoot = (Parent) fxmlLoader.load();
 				
 				GameSingleController dc = fxmlLoader.getController();
-
-				GameConfig config = new GameConfig(gameType, noOfInputs);
 				Main.reset();
-				Main.setup(config);
-				dc.initialize(Main.getSolution(), config);
+				Main.setup(noOfInputs, gameType);
+				dc.initialize(Main.getSolution(), noOfInputs, gameType);
 
 			
-				Scene newScene = new Scene(editRoot, MainGUI.BIG_WIDTH, MainGUI.BIG_HEIGHT );
+				Scene newScene = new Scene(editRoot, MainGUI.BIG_WIDTH, MainGUI.BIG_HEIGHT);
 				Stage stage = (Stage) playButton.getScene().getWindow();
 				stage.setTitle("Shooter | Game");
 
