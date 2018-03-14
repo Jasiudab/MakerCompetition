@@ -34,7 +34,6 @@ public class Pins {
 		}
 	}
 	public void run(int lightValue) {
-
 		if (lightValue > max + (max / 10)) {
 			overLimit = true;
 		}

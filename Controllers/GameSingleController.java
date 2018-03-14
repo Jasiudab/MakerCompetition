@@ -107,29 +107,21 @@ public class GameSingleController {
 
 		}
 		// return to setup
-		currentInputs = 0;
-		fiveSecondsWonder.stop();
+		reset();
 		player.addScore(score);
 		try {
-			System.out.println("asdf");
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Scenes/ConfigSingle.fxml"));
-			Parent editRoot = (Parent) fxmlLoader.load();
-
-			Scene newScene = new Scene(editRoot, MainGUI.BIG_WIDTH, MainGUI.BIG_HEIGHT);
 			Stage stage = (Stage) currentNumber.getScene().getWindow();
-			stage.setTitle("Shooter | Config");
-
-			stage.setScene(newScene);
 			stage.close();
 
 		} catch (Exception e) {
 		}
 		// textBasedSetup();
 	}
-
-	public void shootClicked() {
-		int toShot = Integer.parseInt(this.numberInputTextFields.getText());
-		this.shotHappenedFor(toShot);
+	public void reset() {
+		currentInputs = 0;
+		if(fiveSecondsWonder != null) {
+			fiveSecondsWonder.getKeyFrames().clear();
+			fiveSecondsWonder = null;
+		}
 	}
-
 }

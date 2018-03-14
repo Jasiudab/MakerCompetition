@@ -30,9 +30,15 @@ public class Main {
 		pinsList.add(new Pins(4, 0, 0,  pinsValues[3]));
 		pinsList.add(new Pins(5, 0, 0,  pinsValues[4]));
 	}
+	public static void changePinsValues() {
+		pinsList.get(0).setCodeValue(pinsValues[0]);
+		pinsList.get(1).setCodeValue(pinsValues[1]);
+		pinsList.get(2).setCodeValue(pinsValues[2]);
+		pinsList.get(3).setCodeValue(pinsValues[3]);
+		pinsList.get(4).setCodeValue(pinsValues[4]);
+		
+	}
 	public static void reset() {
-		pinsList.clear();
-		main = null;
 		solution = 0;
 		noInputs = 0;
 		userInput = null;
@@ -41,18 +47,40 @@ public class Main {
 		isNewInput = false;
 		pinsValues = new int[5];
 	}
+	public static void setUpInput() {
+		main = new ArduinoInput();
+		main.initialize();
+		main.setState("setup");
+		setUpPins();
+		Thread t = new Thread() {
+			public void run() {
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException ie) {
+				}
+			}
+		};
+		t.start();
+		try {
+			t.join();
+		} catch (Exception e) {
+		}
+		main.setState("silent");
+	}
+	public static void close() {
+		main.close();
+	}
 	
-
+	
 	public static void setup(int n, String game) {
 		inputEntered = 0;
 		
 		ProblemGenerator.setUp();
 		noInputs = n;
 		numberShot = 1;
-		main = new ArduinoInput();
-		main.initialize();
+
 		// getting maximum light values
-		main.setState("setup");
+
 		// setup problem generator
 		switch(game) {
 		case "multiplication": 
@@ -72,24 +100,10 @@ public class Main {
 		break;
 		}
 
-		setUpPins(); //setup pins
 
 		userInput = new int[noInputs];
-		// setup pins maximum light values
+		changePinsValues();
 		
-		Thread t = new Thread() {
-			public void run() {
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException ie) {
-				}
-			}
-		};
-		t.start();
-		try {
-			t.join();
-		} catch (Exception e) {
-		}
 
 		// run the thing
 		main.setState("run");
@@ -99,19 +113,11 @@ public class Main {
 
 	public static void recieveInput(int id) {
 		int test = pinsList.get(id).getCodeValue();
-		if(inputEntered < noInputs) {
 			userInput[inputEntered] = test;
 			inputEntered++;
 			numberShot = test;
 			isNewInput = true;
 			
-		}
-		if(inputEntered == noInputs) {
-			main.setState("silent");
-			main.close();
-			reset();
-		}
-
 		
 
 	}

@@ -92,7 +92,6 @@ public class ArduinoInput implements SerialPortEventListener {
 					Main.pinsList.get(id).setUp(inputNumber);
 					break;
 				case "run":
-					
 					Main.pinsList.get(id).run(inputNumber);
 					break;
 				case "silent" : break;

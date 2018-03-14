@@ -35,6 +35,7 @@ public class ConfigSingleController {
 				GameSingleController dc = fxmlLoader.getController();
 				Main.reset();
 				Main.setup(noOfInputs, gameType);
+				dc.reset();
 				dc.initialize(Main.getSolution(), noOfInputs, gameType, new Player(0, "Player"));
 
 			
