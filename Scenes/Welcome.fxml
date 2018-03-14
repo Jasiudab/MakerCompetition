@@ -26,7 +26,7 @@
                         <Insets left="5.0" right="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button id="big-button" fx:id="multiButton" mnemonicParsing="false" text="Multi Player&#10;">
+                  <Button id="big-button" fx:id="multiButton" mnemonicParsing="false" onAction="#multiModeClicked" text="Multi Player&#10;">
                      <opaqueInsets>
                         <Insets left="5.0" right="5.0" />
                      </opaqueInsets>
