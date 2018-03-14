@@ -1,5 +1,7 @@
 package Controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -8,15 +10,22 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import src.Player;
-
+import javafx.scene.control.ComboBox;
 import java.io.IOException;
 import java.util.ArrayList;
 
 
 public class WelcomeController {
 
+	private ObservableList<String> noOfPlayersChoiceList = FXCollections.observableArrayList("2 players", "3 players","4 players","5 players");
 
 	@FXML private Button singleButton;
+	@FXML private ComboBox<String> noOfPlayersComboBox;
+
+	public void initialize() {
+		noOfPlayersComboBox.setItems(noOfPlayersChoiceList);
+	}
+
 
 	/**
 	 * Event handler for when user clicks the singleplayer button
@@ -57,7 +66,6 @@ public class WelcomeController {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Scenes/GameMulti.fxml"));
 			Parent editRoot = (Parent) fxmlLoader.load();
 
-
 			GameMultiController dc = fxmlLoader.getController();
 			dc.initialize(players);
 
@@ -73,6 +81,10 @@ public class WelcomeController {
 			System.exit(-1);
 
 		}
+	}
+
+	@FXML
+	private void noOfPlayersComboBox() {
 	}
 
 }
