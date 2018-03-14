@@ -27,7 +27,7 @@ public class WelcomeController {
 	@FXML private Button singleButton;
 
 	/**
-	 * Event handler for when user clicks the login button
+	 * Event handler for when user clicks the singleplayer button
 	 */
 	public void singleModeClicked() {
 
@@ -46,6 +46,30 @@ public class WelcomeController {
 			// Quit the program (with an error code)
 			System.exit(-1);
 			
+		}
+	}
+
+	public void multiModeClicked() {
+
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Scenes/GameMultiplayer.fxml"));
+			Parent editRoot = (Parent) fxmlLoader.load();
+
+
+			GameMultiplayer dc = fxmlLoader.getController();
+			dc.initialize();
+
+			Scene newScene = new Scene(editRoot);
+			Stage stage = (Stage) singleButton.getScene().getWindow();
+			stage.setTitle("Shooter | Config");
+
+			stage.setScene(newScene);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			// Quit the program (with an error code)
+			System.exit(-1);
+
 		}
 	}
 
