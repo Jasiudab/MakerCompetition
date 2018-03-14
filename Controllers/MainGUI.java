@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 
 public class MainGUI extends Application {
 
+	public static final int BIG_HEIGHT = 600;
+	public static final int BIG_WIDTH = 800;
+
 	/**
 	 * @param args
 	 */
@@ -31,7 +34,7 @@ public class MainGUI extends Application {
 			WelcomeController dc = fxmlLoader.getController();
 			dc.initialize();
 		
-		Scene scene = new Scene(editRoot);
+		Scene scene = new Scene(editRoot, MainGUI.BIG_WIDTH, MainGUI.BIG_HEIGHT);
 		stage.setTitle("Welcome");
 		stage.setScene(scene);
 		stage.show();

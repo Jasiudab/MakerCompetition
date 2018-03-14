@@ -38,7 +38,7 @@ public class WelcomeController {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Scenes/ConfigSingle.fxml"));
 				Parent editRoot = (Parent) fxmlLoader.load();
 
-				Scene newScene = new Scene(editRoot);
+				Scene newScene = new Scene(editRoot, MainGUI.BIG_WIDTH, MainGUI.BIG_HEIGHT);
 				Stage stage = (Stage) singleButton.getScene().getWindow();
 				stage.setTitle("Shooter | Config");
 
@@ -63,7 +63,7 @@ public class WelcomeController {
 				ConfigMultiController dc = fxmlLoader.getController();
 				dc.initialize(Integer.parseInt(noOfPlayersComboBox.getValue().substring(0, 1)));
 
-				Scene newScene = new Scene(editRoot);
+				Scene newScene = new Scene(editRoot, MainGUI.BIG_WIDTH, MainGUI.BIG_HEIGHT);
 				Stage stage = (Stage) singleButton.getScene().getWindow();
 				stage.setTitle("LaserGun | Game");
 

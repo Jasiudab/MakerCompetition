@@ -38,7 +38,7 @@ public class ConfigSingleController {
 				dc.initialize(Main.getSolution(), noOfInputs, gameType);
 
 			
-				Scene newScene = new Scene(editRoot);
+				Scene newScene = new Scene(editRoot, MainGUI.BIG_WIDTH, MainGUI.BIG_HEIGHT);
 				Stage stage = (Stage) playButton.getScene().getWindow();
 				stage.setTitle("Shooter | Game");
 

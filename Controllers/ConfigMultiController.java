@@ -52,7 +52,7 @@ public class ConfigMultiController {
             GameMultiController dc = fxmlLoader.getController();
             dc.initialize(players);
 
-            Scene newScene = new Scene(editRoot);
+            Scene newScene = new Scene(editRoot, MainGUI.BIG_WIDTH, MainGUI.BIG_HEIGHT);
             Stage stage = (Stage) gridPane.getScene().getWindow();
             stage.setTitle("LaserGun | Game");
 
