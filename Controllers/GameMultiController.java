@@ -103,7 +103,7 @@ public class GameMultiController {
 
         this.nextPlayerLabel.setText(players.get(counter).getName());
 
-        Collections.sort(players);
+        Collections.sort(players, Collections.reverseOrder());
 
         int position = 1;
         for (Player elem : players) {
@@ -114,7 +114,6 @@ public class GameMultiController {
         }
 
         for (Player elem : players) {
-
             System.out.println(elem);
         }
 
