@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class GameMultiController {
 
@@ -76,7 +78,20 @@ public class GameMultiController {
 
     }
 
+
+
     private void refresh(){
+
+        Collections.sort(players);
+
+        int position = 1;
+        for (Player elem : players) {
+
+            elem.setPosition(position);
+            position++;
+
+        }
+
         for (PlayerRowController elem : playersControllers) {
 
             elem.refresh();
