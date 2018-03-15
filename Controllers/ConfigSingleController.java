@@ -50,6 +50,7 @@ public class ConfigSingleController {
 
 				Music.stopIntroMusic();
 				Music.playTransitionMusic();
+				Music.playIntenseMusic();
 
 		} catch (IOException e) {
 			e.printStackTrace();

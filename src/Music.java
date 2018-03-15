@@ -28,7 +28,7 @@ public class Music
 
     public static void playIntenseMusic()
     {
-        introMusic = new AudioClip(Paths.get("src/music.mp3").toUri().toString());
+        introMusic = new AudioClip(Paths.get("src/intenseMusic.wav").toUri().toString());
         introMusic.setCycleCount(INDEFINITE);
         introMusic.play();
     }
