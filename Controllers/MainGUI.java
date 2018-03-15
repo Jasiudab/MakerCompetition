@@ -10,12 +10,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javafx.stage.Stage;
+import src.Music;
 
 public class MainGUI extends Application {
 
 	public static final int BIG_HEIGHT = 600;
 	public static final int BIG_WIDTH = 800;
-
+	
 	/**
 	 * @param args
 	 */
@@ -39,6 +40,8 @@ public class MainGUI extends Application {
 		stage.setTitle("Welcome");
 		stage.setScene(scene);
 		stage.show();
+
+		Music.playIntroMusic();
 
 		} catch (Exception e) {
 			e.printStackTrace();
