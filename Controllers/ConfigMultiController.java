@@ -30,7 +30,6 @@ public class ConfigMultiController {
             playerConfigRowController.initialize(row);
 
             playersControllers.add(playerConfigRowController);
-            System.out.println(row);
 
             gridPane.add(playerConfigRowController, 0, row);
             row++;
