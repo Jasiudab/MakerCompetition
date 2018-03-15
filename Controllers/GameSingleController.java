@@ -84,8 +84,9 @@ public class GameSingleController {
 		fiveSecondsWonder.play();
 
 		/*
-		Timer stuff, don't try to understand
+		Timer stuff, don't try to understand,
 		Source: http://asgteach.com/2011/10/javafx-animation-and-binding-simple-countdown-timer-2/
+		and my own code of course
 		 */
 		timerLabel.textProperty().bind(timeSeconds.asString());
 		if (timeline != null) {

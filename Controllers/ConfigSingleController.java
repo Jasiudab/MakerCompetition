@@ -108,4 +108,23 @@ public class ConfigSingleController {
 	}
 	
 
+	public void backButtonClicked(){
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Scenes/Welcome.fxml"));
+		try {
+			Parent editRoot = (Parent) fxmlLoader.load();
+
+			WelcomeController dc = fxmlLoader.getController();
+			dc.initialize();
+
+			Scene newScene = new Scene(editRoot, MainGUI.BIG_WIDTH, MainGUI.BIG_HEIGHT);
+			Stage stage = (Stage) multiButton.getScene().getWindow();
+			stage.setTitle("Shooter | Config");
+
+			stage.setScene(newScene);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+
+	}
 }
