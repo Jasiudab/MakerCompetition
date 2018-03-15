@@ -121,10 +121,9 @@ public class ConfigSingleController {
 			stage.setTitle("Shooter | Config");
 
 			stage.setScene(newScene);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-
 	}
 }
