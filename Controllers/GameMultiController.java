@@ -30,11 +30,11 @@ public class GameMultiController {
         this.players = players;
 
         gridPane.addRow(players.size());
-        int row = 0;
+        int row = 1;
         for (Player elem : players) {
 
             PlayerRowController playerRowController = new PlayerRowController();
-            playerRowController.initialize(elem, row+1);
+            playerRowController.initialize(elem, row);
 
             playersControllers.add(playerRowController);
 

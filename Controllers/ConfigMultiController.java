@@ -23,13 +23,14 @@ public class ConfigMultiController {
     public void initialize(int noOfPlayers) {
         this.noOfPlayers = noOfPlayers;
         gridPane.addRow(noOfPlayers);
-        int row = 0;
+        int row = 1;
         for (int i = 0; i < this.noOfPlayers; i++) {
 
             PlayerConfigRowController playerConfigRowController = new PlayerConfigRowController();
-            playerConfigRowController.initialize(row+1);
+            playerConfigRowController.initialize(row);
 
             playersControllers.add(playerConfigRowController);
+            System.out.println(row);
 
             gridPane.add(playerConfigRowController, 0, row);
             row++;
