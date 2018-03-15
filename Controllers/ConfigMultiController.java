@@ -28,6 +28,7 @@ public class ConfigMultiController {
     public void initialize(int noOfPlayers) {
         this.noOfPlayers = noOfPlayers;
         gridPane.addRow(noOfPlayers);
+        noOfTurnsTextField.setText("2");
         int row = 1;
         for (int i = 0; i < this.noOfPlayers; i++) {
 
