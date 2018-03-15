@@ -59,7 +59,7 @@ public class ConfigMultiController {
 
             stage.setScene(newScene);
 
-            Music.introToPause();
+            Music.changeToPause();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -135,6 +135,7 @@ public class ConfigMultiController {
             stage.setTitle("Shooter | Config");
 
             stage.setScene(newScene);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

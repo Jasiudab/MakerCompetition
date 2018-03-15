@@ -11,6 +11,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.control.ComboBox;
+import src.Music;
+
 import java.io.IOException;
 
 
@@ -43,6 +45,7 @@ public class WelcomeController {
 				stage.setTitle("Shooter | Config");
 
 				stage.setScene(newScene);
+
 
 		} catch (IOException e) {
 			e.printStackTrace();

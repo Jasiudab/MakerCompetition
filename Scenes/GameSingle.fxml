@@ -107,7 +107,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button id="big-button" fx:id="timerLabel" mnemonicParsing="false" textAlignment="CENTER" textFill="#8d0505">
+            <Button id="big-button" fx:id="timerLabel" mnemonicParsing="false" onAction="#timerLabelClicked" textAlignment="CENTER" textFill="#8d0505">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

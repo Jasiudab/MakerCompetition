@@ -14,7 +14,6 @@ import src.Music;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class GameMultiController {
@@ -76,11 +75,11 @@ public class GameMultiController {
 
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent we) {
-                    Music.intenseToPause();
+                    Music.changeToPause();
                 }
             });
 
-            Music.pauseToIntense();
+            Music.changeToIntense();
 
             stage.showAndWait();
 
@@ -113,9 +112,9 @@ public class GameMultiController {
 
         }
 
-        for (Player elem : players) {
-            System.out.println(elem);
-        }
+//        for (Player elem : players) {
+//            System.out.println(elem);
+//        }
 
         for (PlayerRowController elem : playersControllers) {
             elem.refresh();

@@ -52,7 +52,7 @@ public class ConfigSingleController {
 
 				stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 					public void handle(WindowEvent we) {
-						Music.intenseToPause();
+						Music.changeToPause();
 					}
 				});
 
@@ -121,7 +121,8 @@ public class ConfigSingleController {
 			stage.setTitle("Shooter | Config");
 
 			stage.setScene(newScene);
-			
+
+			Music.changeToIntro();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -8,9 +8,6 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -106,6 +103,7 @@ public class GameSingleController {
 	}
 
 	public void shotHappenedFor(int number) {
+		Music.shootLaser();
 		System.out.println("current input " + currentInputs);
 		if (currentInputs < noOfInputs) { // if inputs is less than number
 
@@ -144,9 +142,10 @@ public class GameSingleController {
 		reset();
 		player.addScore(score);
 		try {
+			timeline.stop();
 			Stage stage = (Stage) currentNumber.getScene().getWindow();
 			stage.close();
-			Music.intenseToPause();
+			Music.changeToPause();
 
 		} catch (Exception e) {
 		}
@@ -158,5 +157,9 @@ public class GameSingleController {
 			fiveSecondsWonder.getKeyFrames().clear();
 			fiveSecondsWonder = null;
 		}
+	}
+
+	public void timerLabelClicked(){
+		this.shotHappenedFor(5);
 	}
 }
