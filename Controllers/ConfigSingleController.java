@@ -52,9 +52,7 @@ public class ConfigSingleController {
 
 				stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 					public void handle(WindowEvent we) {
-						Music.stopIntenseMusic();
-						Music.playTransitionMusic();
-						Music.playPauseMusic();
+						Music.intenseToPause();
 					}
 				});
 

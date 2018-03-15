@@ -59,9 +59,7 @@ public class ConfigMultiController {
 
             stage.setScene(newScene);
 
-            Music.stopIntroMusic();
-            Music.playTransitionMusic();
-            Music.playPauseMusic();
+            Music.introToPause();
 
         } catch (IOException e) {
             e.printStackTrace();

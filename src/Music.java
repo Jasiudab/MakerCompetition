@@ -40,6 +40,24 @@ public class Music
         introMusic.play();
     }
 
+    public static void intenseToPause(){
+        Music.stopIntenseMusic();
+        Music.playTransitionMusic();
+        Music.playPauseMusic();
+    }
+
+    public static void introToPause(){
+        Music.stopIntroMusic();
+        Music.playTransitionMusic();
+        Music.playPauseMusic();
+    }
+
+    public static void pauseToIntense(){
+        Music.stopPauseMusic();
+        Music.playTransitionMusic();
+        Music.playIntenseMusic();
+    }
+
     public static void stopIntroMusic(){
         Music.introMusic.stop();
     }

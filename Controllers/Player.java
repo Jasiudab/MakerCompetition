@@ -44,4 +44,13 @@ public class Player implements Comparable<Player>  {
 	public int compareTo(Player player) {
 		return Integer.compare(this.score, player.score);
 	}
+
+	@Override
+	public String toString() {
+		return "Player{" +
+				"score=" + score +
+				", name='" + name + '\'' +
+				", position=" + position +
+				'}';
+	}
 }

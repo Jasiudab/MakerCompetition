@@ -1,7 +1,10 @@
 package Controllers;
 
 import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import src.Music;
 
 public class GameSingleController {
 
@@ -27,13 +31,22 @@ public class GameSingleController {
 	private TextField numberInputTextFields;
 	@FXML
 	Label l1, l2, l3, l4, l5;
+
 	int goal;
 	int noOfInputs;
 	int currentInputs;
 	String game;
 	Timeline fiveSecondsWonder;
 	private Player player;
-	int score = 0;
+	int score = 10;
+
+	/*
+	Timer stuff
+	 */
+	private static final Integer STARTTIME = 5;
+	private Timeline timeline;
+	@FXML Button timerLabel;
+	private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
 
 	public void initialize(int goal, int noOfInputs, String game, Player player) {
 		this.player = player;
@@ -69,6 +82,26 @@ public class GameSingleController {
 
 		fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
 		fiveSecondsWonder.play();
+
+		/*
+		Timer stuff, don't try to understand
+		Source: http://asgteach.com/2011/10/javafx-animation-and-binding-simple-countdown-timer-2/
+		 */
+		timerLabel.textProperty().bind(timeSeconds.asString());
+		if (timeline != null) {
+			timeline.stop();
+		}
+		timeSeconds.set(STARTTIME);
+		timeline = new Timeline();
+		timeline.getKeyFrames().add(
+				new KeyFrame(Duration.seconds(STARTTIME+1),
+						new KeyValue(timeSeconds, 0)));
+		timeline.playFromStart();
+		timeline.setOnFinished(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				accept();
+			}
+		});
 	}
 
 	public void shotHappenedFor(int number) {
@@ -112,6 +145,7 @@ public class GameSingleController {
 		try {
 			Stage stage = (Stage) currentNumber.getScene().getWindow();
 			stage.close();
+			Music.intenseToPause();
 
 		} catch (Exception e) {
 		}

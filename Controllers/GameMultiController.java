@@ -73,20 +73,17 @@ public class GameMultiController {
             stage.setTitle("Shooter | Game");
 
             stage.setScene(newScene);
-            stage.show();
 
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent we) {
-                    Music.stopIntenseMusic();
-                    Music.playTransitionMusic();
-                    Music.playPauseMusic();
+                    Music.intenseToPause();
                 }
             });
 
+            Music.pauseToIntense();
 
-            Music.stopPauseMusic();
-            Music.playTransitionMusic();
-            Music.playIntenseMusic();
+            stage.showAndWait();
+
 
             counter++;
             this.refresh();
@@ -116,8 +113,14 @@ public class GameMultiController {
 
         }
 
+        for (Player elem : players) {
+
+            System.out.println(elem);
+        }
+
         for (PlayerRowController elem : playersControllers) {
             elem.refresh();
         }
     }
+
 }

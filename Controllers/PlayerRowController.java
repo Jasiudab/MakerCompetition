@@ -39,7 +39,7 @@ public class PlayerRowController extends HBox {
 
     public void refresh() {
         this.scoreLabel.setText(String.valueOf(player.getScore()));
-        this.positionLabel.setText("1");
+        this.positionLabel.setText(String.valueOf(player.getPosition()));
     }
 
     public void foo(String foo) {
