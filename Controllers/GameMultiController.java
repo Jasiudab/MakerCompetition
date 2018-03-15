@@ -5,8 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import src.Music;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,8 +19,8 @@ public class GameMultiController {
 
     int counter = 1;
     @FXML GridPane gridPane;
-    @FXML
-    Button turnLabel;
+    @FXML Button turnLabel;
+    @FXML Label nextPlayerLabel;
 
     private ArrayList<PlayerRowController> playersControllers = new ArrayList<>();
     private ArrayList<Player> players = new ArrayList<>();
@@ -43,6 +45,8 @@ public class GameMultiController {
             gridPane.add(playerRowController, 0, row);
             row++;
         }
+
+        this.nextPlayerLabel.setText(players.get(counter).getName());
     }
 
     public  void goOnButtonClicked(){
@@ -68,6 +72,10 @@ public class GameMultiController {
 
             stage.setScene(newScene);
             stage.show();
+
+            Music.stopPauseMusic();
+            Music.playTransitionMusic();
+            Music.playIntenseMusic();
 
         } catch (IOException e) {
             e.printStackTrace();
