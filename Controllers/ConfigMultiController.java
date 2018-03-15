@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import src.Music;
@@ -16,6 +17,9 @@ public class ConfigMultiController {
 
     @FXML
     GridPane gridPane;
+
+    @FXML
+    TextField noOfTurnsTextField;
 
     private ArrayList<Player> players = new ArrayList<>();
     private ArrayList<PlayerConfigRowController> playersControllers = new ArrayList<>();
@@ -51,7 +55,7 @@ public class ConfigMultiController {
             Parent editRoot = (Parent) fxmlLoader.load();
 
             GameMultiController dc = fxmlLoader.getController();
-            dc.initialize(players, noOfInputs, gameType);
+            dc.initialize(players, noOfInputs, gameType, Integer.parseInt(noOfTurnsTextField.getText()));
 
             Scene newScene = new Scene(editRoot, MainGUI.BIG_WIDTH, MainGUI.BIG_HEIGHT);
             Stage stage = (Stage) gridPane.getScene().getWindow();

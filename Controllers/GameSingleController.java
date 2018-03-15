@@ -40,7 +40,7 @@ public class GameSingleController {
 	/*
 	Timer stuff
 	 */
-	private static final Integer STARTTIME = 5;
+	private static final Integer STARTTIME = 20;
 	private Timeline timeline;
 	@FXML Button timerLabel;
 	private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
@@ -130,16 +130,17 @@ public class GameSingleController {
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setTitle("Success");
 			alert.setContentText("You won!");
-			alert.show();
+			alert.showAndWait();
 		} else {
 			Alert alert = new Alert(Alert.AlertType.WARNING);
 			alert.setTitle("Error");
 			alert.setContentText("You Lost");
-			alert.show();
+			alert.showAndWait();
 
 		}
 		// return to setup
 		reset();
+		score = Integer.parseInt(timerLabel.getText());
 		player.addScore(score);
 		try {
 			timeline.stop();

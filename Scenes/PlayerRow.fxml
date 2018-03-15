@@ -39,7 +39,7 @@
             <Insets left="5.0" right="1.0" />
          </HBox.margin>
       </Label>
-      <Label id="welcome-text" fx:id="positionLabel" text="Label">
+      <Label id="red-text" fx:id="positionLabel" text="Label" textFill="#803c08">
          <HBox.margin>
             <Insets left="1.0" right="5.0" />
          </HBox.margin>
