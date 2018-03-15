@@ -11,7 +11,7 @@ public class Music
     private static AudioClip introMusic;
     private static AudioClip transitionMusic;
     private static AudioClip intenseMusic;
-    private static AudioClip upliftingMusic;
+    private static AudioClip pauseMusic;
 
     public static void playIntroMusic()
     {
@@ -33,7 +33,22 @@ public class Music
         introMusic.play();
     }
 
+    public static void playPauseMusic()
+    {
+        introMusic = new AudioClip(Paths.get("src/pauseMusic.wav").toUri().toString());
+        introMusic.setCycleCount(INDEFINITE);
+        introMusic.play();
+    }
+
     public static void stopIntroMusic(){
+        Music.introMusic.stop();
+    }
+
+    public static void stopIntenseMusic(){
+        Music.introMusic.stop();
+    }
+
+    public static void stopPauseMusic(){
         Music.introMusic.stop();
     }
 }

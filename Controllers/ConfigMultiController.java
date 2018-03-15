@@ -61,6 +61,7 @@ public class ConfigMultiController {
 
             Music.stopIntroMusic();
             Music.playTransitionMusic();
+            Music.playPauseMusic();
 
         } catch (IOException e) {
             e.printStackTrace();
