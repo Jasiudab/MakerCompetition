@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import src.Music;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,6 +59,8 @@ public class ConfigMultiController {
 
             stage.setScene(newScene);
 
+            Music.stopIntroMusic();
+            Music.playTransitionMusic();
 
         } catch (IOException e) {
             e.printStackTrace();

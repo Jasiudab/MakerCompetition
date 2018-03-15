@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import src.Music;
+
 import java.io.IOException;
 
 
@@ -45,6 +47,9 @@ public class ConfigSingleController {
 
 				stage.setScene(newScene);
 				stage.show();
+
+				Music.stopIntroMusic();
+				Music.playTransitionMusic();
 
 		} catch (IOException e) {
 			e.printStackTrace();

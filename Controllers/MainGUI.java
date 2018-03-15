@@ -16,7 +16,7 @@ public class MainGUI extends Application {
 
 	public static final int BIG_HEIGHT = 600;
 	public static final int BIG_WIDTH = 800;
-	
+
 	/**
 	 * @param args
 	 */
