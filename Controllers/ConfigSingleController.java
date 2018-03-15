@@ -1,11 +1,13 @@
 package Controllers;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import src.Music;
 
 import java.io.IOException;
@@ -48,7 +50,15 @@ public class ConfigSingleController {
 				stage.setScene(newScene);
 				stage.show();
 
-				Music.stopIntroMusic();
+				stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+					public void handle(WindowEvent we) {
+						Music.stopIntenseMusic();
+						Music.playTransitionMusic();
+						Music.playPauseMusic();
+					}
+				});
+
+			Music.stopIntroMusic();
 				Music.playTransitionMusic();
 				Music.playIntenseMusic();
 

@@ -1,5 +1,6 @@
 package Controllers;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import src.Music;
 
 import java.io.IOException;
@@ -17,7 +19,7 @@ import java.util.Collections;
 
 public class GameMultiController {
 
-    int counter = 1;
+    int counter = 0;
     @FXML GridPane gridPane;
     @FXML Button turnLabel;
     @FXML Label nextPlayerLabel;
@@ -73,9 +75,21 @@ public class GameMultiController {
             stage.setScene(newScene);
             stage.show();
 
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                public void handle(WindowEvent we) {
+                    Music.stopIntenseMusic();
+                    Music.playTransitionMusic();
+                    Music.playPauseMusic();
+                }
+            });
+
+
             Music.stopPauseMusic();
             Music.playTransitionMusic();
             Music.playIntenseMusic();
+
+            counter++;
+            this.refresh();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -90,6 +104,8 @@ public class GameMultiController {
 
     private void refresh(){
 
+        this.nextPlayerLabel.setText(players.get(counter).getName());
+
         Collections.sort(players);
 
         int position = 1;
@@ -101,7 +117,6 @@ public class GameMultiController {
         }
 
         for (PlayerRowController elem : playersControllers) {
-
             elem.refresh();
         }
     }
